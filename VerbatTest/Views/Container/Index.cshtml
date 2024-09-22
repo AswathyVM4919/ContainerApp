@@ -1,0 +1,61 @@
+﻿@model IEnumerable<VerbatTest.Models.Container>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    <a href="@Url.Action("Create", "Container" )" class="btn btn-primary" target="_blank">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Container Number
+        </th>
+        <th>
+            Shipment Date
+        </th>
+        <th>
+            Origin Port
+        </th>
+        <th>
+            Destination Port
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            File Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContainerNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginPort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestinationPort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a href="@Url.Action("Download", "Container", new { FilePath = item.FilePath })" target="_blank">@Html.DisplayFor(modelItem => item.FilePath)</a>
+            </td>
+            <td>
+                @Html.ActionLink("View", "Details", new { id = item.ContainerId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ContainerId })
+            </td>
+        </tr>
+    }
+
+</table>
