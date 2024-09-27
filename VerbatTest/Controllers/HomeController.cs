@@ -11,6 +11,7 @@ namespace VerbatTest.Controllers
     public class HomeController : Controller
     {
         private readonly ContainerManagementEntities DbContext = new ContainerManagementEntities();
+        [HandleError(View="Error")]
         public ActionResult Login()
         {
             return View();

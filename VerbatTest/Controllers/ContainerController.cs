@@ -13,6 +13,7 @@ namespace VerbatTest.Controllers
     public class ContainerController : Controller
     {
         private readonly ContainerManagementEntities DbContext = new ContainerManagementEntities();
+        [HandleError(View = "Error")]
         public ActionResult Index()
         {
             try
@@ -26,6 +27,7 @@ namespace VerbatTest.Controllers
             }
 
         }
+        [HandleError(View = "Error")]
         public ActionResult Details(int id)
         {
             try
@@ -39,6 +41,7 @@ namespace VerbatTest.Controllers
             }
 
         }
+        [HandleError(View = "Error")]
         public ActionResult Create()
         {
             try
@@ -63,13 +66,21 @@ namespace VerbatTest.Controllers
         {
             try
             {
+                List<SelectListItem> statusList = new List<SelectListItem>();
+                statusList.Add(new SelectListItem { Text = "Select status", Value = "", Selected = true });
+                statusList.Add(new SelectListItem { Text = "Transit", Value = "Transit" });
+                statusList.Add(new SelectListItem { Text = "At Dock", Value = "At Dock" });
+                statusList.Add(new SelectListItem { Text = "Delivered", Value = "Delivered" });
+                ViewBag.Status = statusList;
+
                 if (file != null)
                 {
                     int maxSize = 5 * 1024 * 1024;
                     if (file.ContentLength > maxSize)
                     {
                         ModelState.AddModelError("file", "File size must not exceed 5 MB.");
-                        ViewBag.Message = "File size must not exceed 5 MB.";
+                       ViewBag.Message = "File size must not exceed 5 MB.";
+                        return View();
                     }
 
                     string fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
@@ -77,6 +88,7 @@ namespace VerbatTest.Controllers
                     {
                         ModelState.AddModelError("file", "Invalid file type. Only .pfd are allowed.");
                         ViewBag.Message = "Invalid file type. Only .pfd are allowed.";
+                        return View();
 
                     }
                 }
@@ -108,6 +120,7 @@ namespace VerbatTest.Controllers
             }
             return View(container);
         }
+        [HandleError(View = "Error")]
         public ActionResult Delete(int id)
         {
             try
@@ -128,6 +141,7 @@ namespace VerbatTest.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HandleError(View = "Error")]
         public ActionResult Download(string FilePath)
         {
             try
@@ -138,12 +152,13 @@ namespace VerbatTest.Controllers
                 }
                 else
                 {
-                    string Path = System.Configuration.ConfigurationManager.AppSettings["FileStore"] + FilePath;
-                    if (!System.IO.File.Exists(Path))
+                    //string Path = System.Configuration.ConfigurationManager.AppSettings["FileStore"] + FilePath;
+                    string filepath = Path.Combine(Server.MapPath("~/FileStore"), FilePath);
+                    if (!System.IO.File.Exists(filepath))
                     {
                         return HttpNotFound();
                     }
-                    return File(Path, "application/pdf");
+                    return File(filepath, "application/pdf");
                 }
             }
             catch (Exception ex)

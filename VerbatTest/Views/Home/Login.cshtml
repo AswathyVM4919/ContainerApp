@@ -7,69 +7,46 @@
 {
     @Html.AntiForgeryToken()
     <div class="container" style="max-width:500px;">
-        <div class="card" style="width:500px">
+        <div class="card">
             <div class="card-header bg-opacity-100 text-bg-dark">
                 <h3>Login</h3>
             </div>
             <div class="card-body">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Username)
-                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control col-md-4" })
-                    @Html.ValidationMessageFor(m => m.Username)
+                <div class="row">
+                    <div class="col-5 mb-3">
+                        <div class="form-group">
+                            <label class="control-label">User Name</label>
+                        </div>
+                    </div>
+                    <div class="col-5 mb-3">
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control col-md-4" })
+                            @Html.ValidationMessageFor(m => m.Username)
+                        </div>
+                    </div>
                 </div>
-                <br />
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control col-md-4" })
-                    @Html.ValidationMessageFor(m => m.Password)
+                <div class="row">
+                    <div class="col-5 mb-3">
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                        </div>
+                    </div>
+                    <div class="col-5 mb-3">
+                        <div class="form-group">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control col-md-4" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                    </div>
                 </div>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    <button type="submit" class="btn btn-dark rounded-0">Login</button>
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-dark rounded-0">Login</button>
+                        </div>
                 </div>
-
             </div>
         </div>
     </div>
-
-    @*<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-center text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @User.Identity.Name
-                        </a>
-                        <div aria-labelledby="navbarDropdown">
-  
-                            @Html.ActionLink("Logout", "Logout", "Home", new { @class = "nav-link float-right text-center text-uppercase" })
-                        </div>
-                    </li>
-
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
-
-                    <li>@Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })</li>
-
-                    <li>@Html.ActionLink("Register", "Register", "Home", new { @class = "nav-link float-left" })</li>
-
-                    <li>@Html.ActionLink("Login", "Login", "Home", new { @class = "nav-link float-left" })</li>
-
-
-
-                }
-            </ul>
-        </div>
-    </nav>*@
 
 }
 

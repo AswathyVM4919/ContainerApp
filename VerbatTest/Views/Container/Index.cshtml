@@ -5,7 +5,7 @@
 }
 
 <p>
-    <a href="@Url.Action("Create", "Container" )" class="btn btn-primary" target="_blank">Create New</a>
+    <a href="@Url.Action("Create", "Container" )" class="btn btn-primary">Create New</a>
 </p>
 <table class="table">
     <tr>
@@ -37,7 +37,8 @@
                 @Html.DisplayFor(modelItem => item.ContainerNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ShipmentDate)
+                @{string ShipmentDate = item.ShipmentDate.Date.ToShortDateString();}               
+                @Html.DisplayFor(modelItem => ShipmentDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OriginPort)

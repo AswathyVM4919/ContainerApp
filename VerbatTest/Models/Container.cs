@@ -16,13 +16,13 @@ namespace VerbatTest.Models
     public partial class Container
     {
         public int ContainerId { get; set; }
-        [Required(ErrorMessage = "This feild is required")]
+        [Required(ErrorMessage = "Container Number is required")]
         public string ContainerNumber { get; set; }
-        [Required(ErrorMessage = "This feild is required")]
+        [Required(ErrorMessage = "Shipment Date is required")]
         public DateTime ShipmentDate { get; set; }
-        [Required(ErrorMessage = "This feild is required")]
+        [Required(ErrorMessage = "Origin Port is required")]
         public string OriginPort { get; set; }
-        [Required(ErrorMessage = "This feild is required")]
+        [Required(ErrorMessage = "Destination Port is required")]
         public string DestinationPort { get; set; }
         public string Status { get; set; }
         public string FilePath { get; set; }
